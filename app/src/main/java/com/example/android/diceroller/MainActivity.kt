@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.android.diceroller.model.Die
 import java.util.*
 
 /**
@@ -29,6 +30,8 @@ import java.util.*
  * value between 1 and 6.
  */
 class MainActivity : AppCompatActivity() {
+
+    private val die = Die()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +48,8 @@ class MainActivity : AppCompatActivity() {
      */
     private fun rollDice() {
         Toast.makeText(this, getString(R.string.dice_rolled), Toast.LENGTH_SHORT).show()
-        val randomInt = (1..6).random()
+        die.roll()
+        val randomInt = die.value
 
         val resultText: TextView = findViewById(R.id.result_text)
         resultText.text = randomInt.toString()
