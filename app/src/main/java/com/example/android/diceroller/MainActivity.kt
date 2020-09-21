@@ -32,6 +32,10 @@ import java.util.*
  */
 class MainActivity : AppCompatActivity() {
 
+    companion object{
+        const val CURRENT_DIE_VALUE = "current_die_value"
+    }
+
     private val die = Die()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         rollButton.setOnClickListener{ rollDice()}
 
         if(savedInstanceState is Bundle){
-            die.value = savedInstanceState.getInt("current_die_value")
+            die.value = savedInstanceState.getInt(CURRENT_DIE_VALUE)
         }
         displayDice()
 
@@ -52,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt("current_die_value", die.value)
+        outState.putInt(CURRENT_DIE_VALUE, die.value)
     }
 
     /**
