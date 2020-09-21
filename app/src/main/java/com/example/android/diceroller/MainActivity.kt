@@ -42,7 +42,18 @@ class MainActivity : AppCompatActivity() {
         val rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener { rollDice() }
 
-        rollDice()
+        if(savedInstanceState is Bundle){
+            die.value = savedInstanceState.getInt("current_die_value")
+        }else{
+            die.roll()
+        }
+        displayDice()
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("current_die_value", die.value)
     }
 
     /**
