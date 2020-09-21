@@ -19,4 +19,5 @@
 
     <!-- Button label -->
     <string name="roll_label">Roll</string>
+    <string name="dice_rolled">dice rolled</string>
 </resources>
