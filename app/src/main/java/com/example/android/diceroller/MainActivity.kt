@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity() {
     private fun rollDice() {
         Toast.makeText(this, getString(R.string.dice_rolled), Toast.LENGTH_SHORT).show()
         die.roll()
+        displayDice()
+    }
+
+    private fun displayDice() {
         val randomInt = die.value
 
         val resultText: TextView = findViewById(R.id.result_text)
