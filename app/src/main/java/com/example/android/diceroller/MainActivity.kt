@@ -18,6 +18,7 @@ package com.example.android.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -33,12 +34,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val rollButton: Button = findViewById(R.id.roll_button)
-        rollButton.setOnClickListener { rollDice() }
+        rollButton.setOnClickListener{ rollDice()}
 
         if(savedInstanceState is Bundle){
             die.value = savedInstanceState.getInt("current_die_value")
-        }else{
-            die.roll()
         }
         displayDice()
 
@@ -56,9 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayDice() {
-        val randomInt = die.value
-
         val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = randomInt.toString()
+        resultText.text = if(die.value > 0) die.value.toString() else " "
     }
 }
