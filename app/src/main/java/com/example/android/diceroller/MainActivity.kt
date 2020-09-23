@@ -25,11 +25,6 @@ import android.widget.Toast
 import com.example.android.diceroller.model.Die
 import java.util.*
 
-/**
- * DiceRoller demonstrates simple interactivity in an Android app.
- * It contains one button that updates a text view with a random
- * value between 1 and 6.
- */
 class MainActivity : AppCompatActivity() {
 
     companion object{
@@ -42,10 +37,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Get the Button view from the layout and assign a click
-        // listener to it.
         val rollButton: Button = findViewById(R.id.roll_button)
-        rollButton.setOnClickListener{ rollDice()}
+        rollButton.setOnClickListener { rollDice() }
 
         if(savedInstanceState is Bundle){
             die.value = savedInstanceState.getInt(CURRENT_DIE_VALUE)
@@ -59,9 +52,6 @@ class MainActivity : AppCompatActivity() {
         outState.putInt(CURRENT_DIE_VALUE, die.value)
     }
 
-    /**
-     * Click listener for the Roll button.
-     */
     private fun rollDice() {
         Toast.makeText(this, getString(R.string.dice_rolled), Toast.LENGTH_SHORT).show()
         die.roll()
@@ -70,6 +60,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun displayDice() {
         val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = if(die.value > 0) die.value.toString() else " "
+        resultText.text =
+            if (die.value > 0)
+                die.value.toString()
+            else " "
     }
 }

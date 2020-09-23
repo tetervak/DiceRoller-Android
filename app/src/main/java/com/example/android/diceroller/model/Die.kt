@@ -1,20 +1,26 @@
 package com.example.android.diceroller.model
 
+import android.util.Log
 import java.lang.IllegalArgumentException
 
-class Die(dieValue: Int = 0) {
+class Die() {
 
     // zero means not rolled yet
-    var value: Int = dieValue
-    set(n){
-        if(n in 0..6){
-            field = n
-        }else{
-            throw IllegalArgumentException("Illegal dice value $n")
+    var value: Int = 0
+        set(n) {
+            if (n in 0..6) {
+                field = n
+            } else {
+                Log.e("Die", "Illegal die value $n")
+                //throw IllegalArgumentException("Illegal die value $n")
+            }
         }
+
+    constructor(n: Int) : this() {
+        value = n
     }
 
-    fun roll(){
+    fun roll() {
         value = (1..6).random()
     }
 }
