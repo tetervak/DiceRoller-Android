@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
             die.value = savedInstanceState.getInt("current_die_value")
         }
         displayDice()
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
