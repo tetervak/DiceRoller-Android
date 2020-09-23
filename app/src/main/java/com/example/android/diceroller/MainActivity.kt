@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import com.example.android.diceroller.databinding.ActivityMainBinding
 import com.example.android.diceroller.model.Die
 
 class MainActivity : AppCompatActivity() {
@@ -14,14 +15,16 @@ class MainActivity : AppCompatActivity() {
         const val CURRENT_DIE_VALUE = "current_die_value"
     }
 
+    private lateinit var binding: ActivityMainBinding
+
     private val die = Die()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val rollButton: Button = findViewById(R.id.roll_button)
-        rollButton.setOnClickListener { rollDice() }
+        binding.rollButton.setOnClickListener { rollDice() }
 
         if(savedInstanceState is Bundle){
             die.value = savedInstanceState.getInt(CURRENT_DIE_VALUE)
@@ -42,8 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayDice() {
-        val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text =
+        binding.resultText.text =
             if (die.value > 0)
                 die.value.toString()
             else " "
