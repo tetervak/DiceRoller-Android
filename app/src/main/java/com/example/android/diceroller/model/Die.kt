@@ -7,20 +7,20 @@ class Die() {
 
     // zero means not rolled yet
     var value: Int = 0
-        set(n){
-            if(n in 0..6){
+        set(n) {
+            if (n in 0..6) {
                 field = n
-            }else{
+            } else {
                 Log.e("Die", "Illegal die value $n")
                 //throw IllegalArgumentException("Illegal die value $n")
             }
         }
 
-    constructor(n: Int):this(){
+    constructor(n: Int) : this() {
         value = n
     }
 
-    fun roll(){
+    fun roll() {
         value = (1..6).random()
     }
 }

@@ -34,9 +34,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val rollButton: Button = findViewById(R.id.roll_button)
-        rollButton.setOnClickListener{ rollDice()}
+        rollButton.setOnClickListener { rollDice() }
 
-        if(savedInstanceState is Bundle){
+        if (savedInstanceState is Bundle) {
             die.value = savedInstanceState.getInt("current_die_value")
         }
         displayDice()
@@ -55,6 +55,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun displayDice() {
         val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = if(die.value > 0) die.value.toString() else " "
+        resultText.text =
+            if (die.value > 0)
+                die.value.toString()
+            else " "
     }
 }
