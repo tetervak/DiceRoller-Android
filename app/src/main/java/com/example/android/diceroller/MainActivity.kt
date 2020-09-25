@@ -15,9 +15,9 @@ class MainActivity : AppCompatActivity() {
         const val CURRENT_DIE_VALUE = "current_die_value"
     }
 
-    private lateinit var binding: ActivityMainBinding
+    private val model: DieViewModel by viewModels()
 
-    private lateinit var die: Die
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,24 +26,17 @@ class MainActivity : AppCompatActivity() {
 
         binding.rollButton.setOnClickListener { rollDice() }
 
-        // get the model, pick the die object from the model
-        val model: DieViewModel by viewModels()
-        die = model.die
+        // get the model, set the observer for the die value
+        model.dieValue.observe(this){ displayDice(it)}
 
-        // show the number
-        displayDice()
     }
 
     private fun rollDice() {
         Toast.makeText(this, getString(R.string.dice_rolled), Toast.LENGTH_SHORT).show()
-        die.roll()
-        displayDice()
+        model.roll()
     }
 
-    private fun displayDice() {
-        binding.resultText.text =
-            if (die.value > 0)
-                die.value.toString()
-            else " "
+    private fun displayDice(value: Int) {
+        binding.resultText.text = if (value > 0) value.toString() else " "
     }
 }
