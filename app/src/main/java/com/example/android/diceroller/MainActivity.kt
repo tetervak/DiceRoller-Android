@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         binding.rollButton.setOnClickListener { rollDice() }
 
         // get the model, pick the die object from the model
-        val model: DieViewModel by viewModels()
-        die = model.die
+        val viewModel: DieViewModel by viewModels()
+        die = viewModel.die
 
         // show the number
         displayDice()
