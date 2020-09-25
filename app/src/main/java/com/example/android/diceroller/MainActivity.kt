@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.android.diceroller.databinding.ActivityMainBinding
-import com.example.android.diceroller.model.Die
 import com.example.android.diceroller.ui.DieViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         const val CURRENT_DIE_VALUE = "current_die_value"
     }
 
-    private val model: DieViewModel by viewModels()
+    private val viewModel: DieViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
 
@@ -27,13 +26,13 @@ class MainActivity : AppCompatActivity() {
         binding.rollButton.setOnClickListener { rollDice() }
 
         // get the model, set the observer for the die value
-        model.dieValue.observe(this){ displayDice(it)}
+        viewModel.dieValue.observe(this){ displayDice(it)}
 
     }
 
     private fun rollDice() {
         Toast.makeText(this, getString(R.string.dice_rolled), Toast.LENGTH_SHORT).show()
-        model.roll()
+        viewModel.roll()
     }
 
     private fun displayDice(value: Int) {
