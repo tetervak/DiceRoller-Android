@@ -8,18 +8,17 @@ import com.example.android.diceroller.model.Die
 class DieViewModel : ViewModel() {
 
     private val die: Die = Die()
-
-    private val dieMutableLiveData: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
+    private val _dieValue: MutableLiveData<Int> = MutableLiveData<Int>()
 
     init{
-       dieMutableLiveData.value = die.value
+       _dieValue.value = die.value
     }
 
     val dieValue: LiveData<Int>
-    get() = dieMutableLiveData
+    get() = _dieValue
 
     fun roll(){
         die.roll()
-        dieMutableLiveData.value = die.value
+        _dieValue.value = die.value
     }
 }
