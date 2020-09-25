@@ -3,11 +3,11 @@ package com.example.android.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.example.android.diceroller.databinding.ActivityMainBinding
 import com.example.android.diceroller.model.Die
+import com.example.android.diceroller.ui.DieViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val die = Die()
+    private lateinit var die: Die
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,16 +26,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.rollButton.setOnClickListener { rollDice() }
 
-        if(savedInstanceState is Bundle){
-            die.value = savedInstanceState.getInt(CURRENT_DIE_VALUE)
-        }
+        // get the model, pick the die object from the model
+        val model: DieViewModel by viewModels()
+        die = model.die
+
+        // show the number
         displayDice()
-
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt(CURRENT_DIE_VALUE, die.value)
     }
 
     private fun rollDice() {
