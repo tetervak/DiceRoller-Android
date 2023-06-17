@@ -1,4 +1,4 @@
-package ca.tetervak.diceroller.data
+package ca.tetervak.diceroller.data.service
 
 import ca.tetervak.diceroller.domain.RollData
 

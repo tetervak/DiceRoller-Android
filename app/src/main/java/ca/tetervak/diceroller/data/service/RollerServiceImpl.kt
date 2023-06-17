@@ -1,4 +1,4 @@
-package ca.tetervak.diceroller.data
+package ca.tetervak.diceroller.data.service
 
 import ca.tetervak.diceroller.domain.RollData
 import kotlin.random.Random
@@ -14,6 +14,6 @@ class RollerServiceImpl(
                     add(random.nextInt(from = 1, until = 7))
                 }
             }
-        return RollDataImpl(list)
+        return RollData(list)
     }
 }
