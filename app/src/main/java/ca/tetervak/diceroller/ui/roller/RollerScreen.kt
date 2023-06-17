@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -51,9 +52,12 @@ fun RollerScreen(modifier: Modifier = Modifier) {
     }) { innerPadding ->
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(20.dp),
             modifier = modifier
+                .fillMaxHeight()
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
+                .padding(top = 40.dp)
                 .fillMaxWidth()
         ) {
             if (rollerUiState is RollerUiState.Rolled) {
@@ -82,11 +86,9 @@ fun RollerScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun TotalRow(total: Int) {
+private fun TotalRow(total: Int, modifier: Modifier = Modifier) {
     Row(
-        modifier = Modifier
-            .wrapContentWidth()
-            .padding(top = 8.dp),
+        modifier = modifier.wrapContentWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
@@ -99,11 +101,9 @@ private fun TotalRow(total: Int) {
 }
 
 @Composable
-private fun DiceValuesRow(list: List<Int>) {
+private fun DiceValuesRow(list: List<Int>, modifier: Modifier = Modifier) {
     Row(
-        modifier = Modifier
-            .wrapContentWidth()
-            .padding(top = 8.dp),
+        modifier = modifier.wrapContentWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         for (value in list) {
@@ -117,11 +117,9 @@ private fun DiceValuesRow(list: List<Int>) {
 }
 
 @Composable
-private fun DiceImagesRow(list: List<Int>) {
+private fun DiceImagesRow(list: List<Int>, modifier: Modifier = Modifier) {
     Row(
-        modifier = Modifier
-            .wrapContentWidth()
-            .padding(top = 16.dp)
+        modifier = modifier.wrapContentWidth(),
     ) {
         for (value in list) {
             DiceImage(value)
@@ -130,11 +128,11 @@ private fun DiceImagesRow(list: List<Int>) {
 }
 
 @Composable
-private fun DiceImage(value: Int) {
+private fun DiceImage(value: Int, modifier: Modifier = Modifier) {
     Image(
         painter = painterResource(diceImageResourceId(value)),
         contentDescription = value.toString(),
-        modifier = Modifier.size(80.dp)
+        modifier = modifier.size(80.dp)
     )
 }
 
