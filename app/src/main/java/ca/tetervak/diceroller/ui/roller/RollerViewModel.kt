@@ -4,14 +4,13 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import ca.tetervak.diceroller.data.service.RollerService
-import ca.tetervak.diceroller.domain.RollData
+import ca.tetervak.diceroller.domain.GetRollDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class RollerViewModel @Inject constructor(
-    private val service: RollerService
+    private val getRollDataUseCase: GetRollDataUseCase
 ) : ViewModel() {
 
     private val _rollerUiState: MutableState<RollerUiState> =
@@ -20,7 +19,7 @@ class RollerViewModel @Inject constructor(
 
     fun onRoll() {
         _rollerUiState.value = RollerUiState.Rolled(
-            rollData = service.getRollData(3)
+            rollData = getRollDataUseCase(3)
         )
     }
 
@@ -29,7 +28,3 @@ class RollerViewModel @Inject constructor(
     }
 }
 
-sealed interface RollerUiState {
-    data class Rolled(val rollData: RollData) : RollerUiState
-    object NotRolled : RollerUiState
-}
