@@ -27,14 +27,13 @@ class RollerViewModel @Inject constructor(
     private val getRollerSavedStateUseCase: GetRollerSavedStateUseCase
 ) : ViewModel() {
 
-    private val _rollerUiState: MutableState<RollerUiState> =
-        mutableStateOf(RollerUiState.NotRolled)
+    private val _rollerUiState: MutableState<RollerUiState> = mutableStateOf(RollerUiState.Loading)
     val rollerUiState: State<RollerUiState> = _rollerUiState
 
     init {
         viewModelScope.launch {
             val rollerSavedState: RollerSavedState = getRollerSavedStateUseCase()
-            if(rollerSavedState is RollerSavedState.Saved){
+            if (rollerSavedState is RollerSavedState.Saved) {
                 val historyItem: HistoryItem = rollerSavedState.historyItem
                 val historyCounts: HistoryCounts = rollerSavedState.historyCounts
                 _rollerUiState.value = RollerUiState.Rolled(
@@ -42,6 +41,8 @@ class RollerViewModel @Inject constructor(
                     historyCounts = historyCounts,
                     date = historyItem.date
                 )
+            } else {
+                _rollerUiState.value = RollerUiState.NotRolled
             }
         }
     }
@@ -50,21 +51,18 @@ class RollerViewModel @Inject constructor(
         val date = Date()
         val rollData: RollData = getRollDataUseCase(3)
         saveRollToHistoryUseCase(rollData = rollData, date = date)
-        val uiState: RollerUiState = rollerUiState.value
-        val newCounts: HistoryCounts =
-            when(uiState){
-            is RollerUiState.Rolled ->
-                uiState.historyCounts.toUpdatedBy(rollTotal = rollData.total)
-            is RollerUiState.NotRolled -> HistoryCounts(historyLength = 1, historyTotal = rollData.total)
+        val newCounts: HistoryCounts = when (val uiState: RollerUiState = rollerUiState.value) {
+            is RollerUiState.Rolled -> uiState.historyCounts.toUpdatedBy(rollTotal = rollData.total)
+            else -> HistoryCounts(
+                historyLength = 1, historyTotal = rollData.total
+            )
         }
         _rollerUiState.value = RollerUiState.Rolled(
-            rollData = rollData,
-            historyCounts = newCounts,
-            date = date
+            rollData = rollData, historyCounts = newCounts, date = date
         )
     }
 
-    fun onReset() = viewModelScope.launch{
+    fun onReset() = viewModelScope.launch {
         resetHistoryUseCase()
         _rollerUiState.value = RollerUiState.NotRolled
     }
