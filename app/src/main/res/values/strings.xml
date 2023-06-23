@@ -5,11 +5,14 @@
     <string name="roll_dice">Roll Dice</string>
     <string name="reset_button_label">Reset</string>
     <string name="blank">&#160;</string>
-    <string name="total_label">Total:</string>
+    <string name="roll_total_label">Roll Total:</string>
+    <string name="history_total_label">History Total</string>
+
     <string name="dice_image">dice image</string>
 
     <!-- Navigation -->
     <string name="nav_roller_title">Dice Roller</string>
     <string name="nav_history_title">Roll History</string>
     <string name="back_button">Back</string>
+
 </resources>

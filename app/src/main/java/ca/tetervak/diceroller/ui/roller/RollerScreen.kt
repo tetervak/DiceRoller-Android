@@ -1,5 +1,6 @@
 package ca.tetervak.diceroller.ui.roller
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -65,9 +66,11 @@ fun RollerScreen(modifier: Modifier = Modifier) {
                 val list: List<Int> = rollData.values
                 DiceImagesRow(list)
                 DiceValuesRow(list)
-                TotalRow(total = rollData.total)
+                TotalRow(labelRes = R.string.roll_total_label, total = rollData.total)
+                TotalRow(labelRes = R.string.history_total_label, total = rollerUiState.historyTotal)
             } else {
-                TotalRow(total = 0)
+                TotalRow(labelRes = R.string.roll_total_label, total = 0)
+                TotalRow(labelRes = R.string.history_total_label, total = 0)
             }
             Button(
                 onClick = { viewModel.onRoll() }, modifier = Modifier.padding(top = 8.dp)
@@ -86,13 +89,13 @@ fun RollerScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun TotalRow(total: Int, modifier: Modifier = Modifier) {
+fun TotalRow(@StringRes labelRes: Int, total: Int, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier.wrapContentWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
-            text = stringResource(R.string.total_label), fontSize = 34.sp
+            text = stringResource(labelRes), fontSize = 34.sp
         )
         Text(
             text = total.toString(), fontSize = 34.sp, color = colorResource(R.color.green_500)
