@@ -11,15 +11,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import ca.tetervak.diceroller.R
 import ca.tetervak.diceroller.domain.HistoryCounts
 import ca.tetervak.diceroller.domain.RollData
 import ca.tetervak.diceroller.ui.common.DiceImagesRow
 import ca.tetervak.diceroller.ui.common.DiceValuesRow
 import ca.tetervak.diceroller.ui.common.TotalRow
+import ca.tetervak.diceroller.ui.common.formatDateAndTime
 import ca.tetervak.diceroller.ui.theme.AppTheme
 import java.util.Date
 
@@ -52,6 +55,7 @@ fun RolledBody(
         TotalRow(
             labelRes = R.string.roll_count, total = historyCounts.historyLength
         )
+        TimeStamp(date)
         Button(
             onClick = onRoll, modifier = Modifier.padding(top = 8.dp)
         ) {
@@ -65,6 +69,15 @@ fun RolledBody(
     }
 }
 
+@Composable
+fun TimeStamp(date: Date) {
+    Text(
+        text = formatDateAndTime(date),
+        fontSize = 18.sp,
+        color = Color.Gray
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 fun RolledBodyPreview(){
@@ -73,7 +86,7 @@ fun RolledBodyPreview(){
             rollData = RollData(listOf(1,2,3)),
             historyCounts = HistoryCounts(
                 historyLength = 2,
-                historyTotal = 32
+                historyTotal = 24
             ),
             date = Date(),
             onRoll = {},
