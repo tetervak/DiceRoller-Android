@@ -1,10 +1,9 @@
 package ca.tetervak.diceroller.domain
 
-import androidx.room.ColumnInfo
-
 data class HistoryCounts(
+    val historyLength: Int, val historyTotal: Int
+)
 
-    val historyLength: Int,
-
-    val historyTotal: Int
+fun HistoryCounts.toUpdatedBy(rollTotal: Int): HistoryCounts = HistoryCounts(
+    historyLength = this.historyLength + 1, historyTotal = this.historyTotal + rollTotal
 )

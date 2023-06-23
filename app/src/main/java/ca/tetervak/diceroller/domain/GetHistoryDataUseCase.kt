@@ -9,6 +9,12 @@ class GetHistoryDataUseCase @Inject constructor(
     private val repository: HistoryItemRepository
 ) {
     operator fun invoke(): Flow<HistoryData> = repository.getAllHistoryItemsFlow().map { list ->
-            HistoryData(historyItems = list, historyTotal = list.sumOf { item -> item.rollTotal })
-        }
+        HistoryData(
+            historyItems = list,
+            historyCounts = HistoryCounts(
+                historyLength = list.size,
+                historyTotal = list.sumOf { item -> item.rollData.total }
+            )
+        )
+    }
 }

@@ -67,7 +67,10 @@ fun RollerScreen(modifier: Modifier = Modifier) {
                 DiceImagesRow(list)
                 DiceValuesRow(list)
                 TotalRow(labelRes = R.string.roll_total_label, total = rollData.total)
-                TotalRow(labelRes = R.string.history_total_label, total = rollerUiState.historyTotal)
+                TotalRow(
+                    labelRes = R.string.history_total_label,
+                    total = rollerUiState.historyCounts.historyTotal
+                )
             } else {
                 TotalRow(labelRes = R.string.roll_total_label, total = 0)
                 TotalRow(labelRes = R.string.history_total_label, total = 0)
@@ -91,8 +94,7 @@ fun RollerScreen(modifier: Modifier = Modifier) {
 @Composable
 fun TotalRow(@StringRes labelRes: Int, total: Int, modifier: Modifier = Modifier) {
     Row(
-        modifier = modifier.wrapContentWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = modifier.wrapContentWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
             text = stringResource(labelRes), fontSize = 34.sp
@@ -106,8 +108,7 @@ fun TotalRow(@StringRes labelRes: Int, total: Int, modifier: Modifier = Modifier
 @Composable
 private fun DiceValuesRow(list: List<Int>, modifier: Modifier = Modifier) {
     Row(
-        modifier = modifier.wrapContentWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = modifier.wrapContentWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         for (value in list) {
             Text(

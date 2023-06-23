@@ -4,7 +4,6 @@ import java.util.Date
 
 data class HistoryItem(
     val id: Int = 0,
-    val rollValues: List<Int>,
-    val rollTotal: Int,
+    val rollData: RollData,
     val date: Date
 )

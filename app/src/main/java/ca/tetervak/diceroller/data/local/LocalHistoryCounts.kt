@@ -8,5 +8,5 @@ data class LocalHistoryCounts(
     val historyLength: Int,
 
     @ColumnInfo(name = "history_total")
-    val historyTotal: Int
+    val historyTotal: Int?
 )

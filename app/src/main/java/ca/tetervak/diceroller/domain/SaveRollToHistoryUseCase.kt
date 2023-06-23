@@ -9,7 +9,7 @@ class SaveRollToHistoryUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(rollData: RollData, date: Date) {
         val historyItem = HistoryItem(
-            rollValues = rollData.values, rollTotal = rollData.total, date = date
+            rollData = rollData, date = date
         )
         repository.insertHistoryItem(historyItem)
     }
