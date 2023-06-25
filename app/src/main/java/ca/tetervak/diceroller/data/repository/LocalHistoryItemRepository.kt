@@ -35,6 +35,11 @@ class LocalHistoryItemRepository @Inject constructor(
         historyItemDao.getHistoryCounts().toHistoryCounts()
     }
 
+    override suspend fun getHistoryCountsUntilId(id: Int): HistoryCounts =
+        withContext(Dispatchers.IO) {
+            historyItemDao.getHistoryCountsUntilId(id).toHistoryCounts()
+        }
+
     override suspend fun getLastHistoryItem(): HistoryItem? = withContext(Dispatchers.IO) {
         historyItemDao.getLastHistoryItem()?.toHistoryItem()
     }
@@ -64,12 +69,10 @@ fun HistoryItem.toLocalHistoryItem(): LocalHistoryItem = LocalHistoryItem(
 )
 
 fun LocalHistoryItem.toHistoryItem(): HistoryItem = HistoryItem(
-    id = this.id,
-    rollData = RollData(
+    id = this.id, rollData = RollData(
         values = this.rollValues.split("+").map { it.toInt() },
         total = this.rollTotal,
-    ),
-    date = this.date
+    ), date = this.date
 )
 
 fun LocalHistoryCounts.toHistoryCounts(): HistoryCounts = HistoryCounts(

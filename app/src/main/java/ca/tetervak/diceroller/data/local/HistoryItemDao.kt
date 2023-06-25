@@ -21,6 +21,10 @@ interface HistoryItemDao {
     @Query("SELECT COUNT(id) AS history_length, SUM(roll_total) AS history_total FROM history_items")
     suspend fun getHistoryCounts(): LocalHistoryCounts
 
+    @Query("SELECT COUNT(id) AS history_length, SUM(roll_total) AS history_total " +
+            "FROM history_items WHERE id<=:id")
+    suspend fun getHistoryCountsUntilId(id: Int): LocalHistoryCounts
+
     @Query("SELECT EXISTS(SELECT id FROM history_items LIMIT 1)")
     suspend fun isHistoryNotEmpty(): Boolean
 
