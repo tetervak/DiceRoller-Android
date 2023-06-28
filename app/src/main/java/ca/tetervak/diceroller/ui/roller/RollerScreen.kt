@@ -9,28 +9,38 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
+import ca.tetervak.diceroller.ui.common.RollerBottomBar
 import ca.tetervak.diceroller.ui.common.RollerTopAppBar
 import ca.tetervak.diceroller.ui.navigation.RollerDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RollerScreen(modifier: Modifier = Modifier) {
-
-    val viewModel: RollerViewModel = viewModel()
+fun RollerScreen(
+    viewModel: RollerViewModel,
+    onTabPressed: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
 
     val state: State<RollerUiState> = viewModel.rollerUiState
     val rollerUiState: RollerUiState = state.value
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    Scaffold(modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection), topBar = {
-        RollerTopAppBar(
-            title = stringResource(RollerDestination.titleRes),
-            canNavigateBack = false,
-            scrollBehavior = scrollBehavior
-        )
-    }) { innerPadding ->
+    Scaffold(modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            RollerTopAppBar(
+                title = stringResource(RollerDestination.titleRes),
+                canNavigateBack = false,
+                scrollBehavior = scrollBehavior
+            )
+        },
+        bottomBar = {
+            RollerBottomBar(
+                currentRoute = RollerDestination.route,
+                onTabPressed = onTabPressed
+            )
+        }
+    ) { innerPadding ->
         when (rollerUiState) {
             is RollerUiState.Rolled -> RolledBody(
                 rollData = rollerUiState.rollData,
