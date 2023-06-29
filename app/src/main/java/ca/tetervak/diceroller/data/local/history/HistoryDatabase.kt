@@ -1,4 +1,4 @@
-package ca.tetervak.diceroller.data.local
+package ca.tetervak.diceroller.data.local.history
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

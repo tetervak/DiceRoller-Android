@@ -1,8 +1,8 @@
 package ca.tetervak.diceroller.data.repository
 
-import ca.tetervak.diceroller.data.local.HistoryItemDao
-import ca.tetervak.diceroller.data.local.LocalHistoryCounts
-import ca.tetervak.diceroller.data.local.LocalHistoryItem
+import ca.tetervak.diceroller.data.local.history.HistoryItemDao
+import ca.tetervak.diceroller.data.local.history.LocalHistoryCounts
+import ca.tetervak.diceroller.data.local.history.LocalHistoryItem
 import ca.tetervak.diceroller.domain.HistoryCounts
 import ca.tetervak.diceroller.domain.HistoryItem
 import ca.tetervak.diceroller.domain.RollData

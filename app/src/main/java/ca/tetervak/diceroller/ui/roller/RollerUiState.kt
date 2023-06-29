@@ -7,7 +7,9 @@ import java.util.Date
 sealed interface RollerUiState {
     object Loading : RollerUiState
     data class Rolled(
-        val rollData: RollData, val historyCounts: HistoryCounts, val date: Date
+        val rollData: RollData,
+        val historyCounts: HistoryCounts,
+        val date: Date,
     ) : RollerUiState
-    object NotRolled : RollerUiState
+    object NotRolled: RollerUiState
 }

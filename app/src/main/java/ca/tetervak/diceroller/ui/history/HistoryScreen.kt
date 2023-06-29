@@ -147,7 +147,9 @@ fun HistoryList(
 fun HistoryListItem(itemState: HistoryItemUiState, modifier: Modifier = Modifier) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        modifier = modifier.padding(8.dp)
+        modifier = modifier
+            .fillMaxWidth(0.8f)
+            .padding(8.dp)
     ){
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp),

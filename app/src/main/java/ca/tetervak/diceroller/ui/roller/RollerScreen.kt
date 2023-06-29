@@ -6,6 +6,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
@@ -24,6 +26,7 @@ fun RollerScreen(
 
     val state: State<RollerUiState> = viewModel.rollerUiState
     val rollerUiState: RollerUiState = state.value
+    val numberOfDice: Int by viewModel.numberOfDice.collectAsState()
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
@@ -47,12 +50,15 @@ fun RollerScreen(
                 rollData = rollerUiState.rollData,
                 historyCounts = rollerUiState.historyCounts,
                 date = rollerUiState.date,
+                numberOfDice = numberOfDice,
                 onRoll = viewModel::onRoll,
                 onReset = viewModel::onReset,
                 modifier = modifier.padding(innerPadding)
             )
             is RollerUiState.NotRolled -> NotRolledBody(
-                onRoll = viewModel::onRoll, modifier = modifier.padding(innerPadding)
+                numberOfDice = numberOfDice,
+                onRoll = viewModel::onRoll,
+                modifier = modifier.padding(innerPadding)
             )
             is RollerUiState.Loading -> LoadingBody(
                 modifier = modifier.padding(innerPadding)

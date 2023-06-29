@@ -10,6 +10,7 @@ import ca.tetervak.diceroller.ui.history.HistoryViewModel
 import ca.tetervak.diceroller.ui.roller.RollerScreen
 import ca.tetervak.diceroller.ui.roller.RollerViewModel
 import ca.tetervak.diceroller.ui.settings.SettingsScreen
+import ca.tetervak.diceroller.ui.settings.SettingsViewModel
 
 @Composable
 fun RollerNavHost(navController: NavHostController){
@@ -30,7 +31,9 @@ fun RollerNavHost(navController: NavHostController){
             )
         }
         composable(route = SettingsDestination.route){
+            val viewModel: SettingsViewModel = hiltViewModel()
             SettingsScreen(
+                viewModel = viewModel,
                 onTabPressed = tabNavigate(navController),
                 navigateBack = { navController.popBackStack() }
             )

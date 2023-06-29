@@ -28,6 +28,7 @@ fun RolledBody(
     rollData: RollData,
     historyCounts: HistoryCounts,
     date: Date,
+    numberOfDice: Int,
     onRoll: () -> Unit,
     onReset: () -> Unit,
     modifier: Modifier = Modifier
@@ -43,7 +44,9 @@ fun RolledBody(
         val list: List<Int> = rollData.values
         DiceImagesRow(list)
         DiceValuesRow(list)
-        TotalRow(labelRes = R.string.roll_total_label, total = rollData.total)
+        if (rollData.numberOfDice > 1){
+            TotalRow(labelRes = R.string.roll_total_label, total = rollData.total)
+        }
         if (historyCounts.historyLength > 1) {
             TotalRow(
                 labelRes = R.string.history_total_label, total = historyCounts.historyTotal
@@ -56,7 +59,7 @@ fun RolledBody(
         Button(
             onClick = onRoll, modifier = Modifier.padding(top = 8.dp)
         ) {
-            Text(text = stringResource(R.string.roll_button_label))
+            Text(text = stringResource(R.string.roll_button_label, numberOfDice))
         }
         Button(
             onClick = onReset, modifier = Modifier.padding(top = 16.dp)
@@ -77,6 +80,7 @@ fun RolledBodyPreview(){
                 historyTotal = 24
             ),
             date = Date(),
+            numberOfDice = 3,
             onRoll = {},
             onReset = {}
         )

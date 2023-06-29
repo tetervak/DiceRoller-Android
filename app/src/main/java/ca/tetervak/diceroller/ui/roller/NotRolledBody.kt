@@ -2,6 +2,7 @@ package ca.tetervak.diceroller.ui.roller
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -17,18 +18,21 @@ import ca.tetervak.diceroller.ui.theme.AppTheme
 
 @Composable
 fun NotRolledBody(
-    onRoll: () -> Unit, modifier: Modifier = Modifier
+    numberOfDice: Int,
+    onRoll: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp),
-        modifier = modifier.padding(top = 40.dp)
+        modifier = modifier.fillMaxWidth().padding(top = 40.dp)
     ) {
         TotalRow(labelRes = R.string.roll_count, total = 0)
         Button(
-            onClick = onRoll, modifier = Modifier.padding(top = 8.dp)
+            onClick = onRoll,
+            modifier = Modifier.padding(top = 8.dp)
         ) {
-            Text(text = stringResource(R.string.roll_button_label))
+            Text(text = stringResource(R.string.roll_button_label, numberOfDice))
         }
     }
 }
@@ -37,6 +41,6 @@ fun NotRolledBody(
 @Composable
 fun NotRolledBodyPreview(){
     AppTheme {
-        NotRolledBody(onRoll = {})
+        NotRolledBody(numberOfDice = 3, onRoll = {})
     }
 }

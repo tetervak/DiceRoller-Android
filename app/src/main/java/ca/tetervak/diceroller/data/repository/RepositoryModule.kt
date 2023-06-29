@@ -13,4 +13,9 @@ abstract class RepositoryModule {
     abstract fun bindHistoryItemRepository(
         repository: LocalHistoryItemRepository
     ): HistoryItemRepository
+
+    @Binds
+    abstract fun bindUserSettingsRepository(
+        repository: LocalUserSettingsRepository
+    ): UserSettingsRepository
 }
