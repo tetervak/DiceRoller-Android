@@ -8,13 +8,13 @@ interface HistoryItemRepository {
 
     fun getAllHistoryItemsFlow(): Flow<List<HistoryItem>>
 
-    suspend fun getHistoryItemById(id: Int): HistoryItem
+    //suspend fun getHistoryItemById(id: Int): HistoryItem
 
-    suspend fun getHistoryTotal(): Int
+    //suspend fun getHistoryTotal(): Int
 
     suspend fun getHistoryCounts(): HistoryCounts
 
-    suspend fun getHistoryCountsUntilId(id: Int): HistoryCounts
+    //suspend fun getHistoryCountsUntilId(id: Int): HistoryCounts
 
     suspend fun getLastHistoryItem(): HistoryItem?
 
@@ -22,7 +22,7 @@ interface HistoryItemRepository {
 
     suspend fun isHistoryNotEmpty(): Boolean
 
-    suspend fun deleteHistoryItemById(id: Int)
+    //suspend fun deleteHistoryItemById(id: Int)
 
     suspend fun deleteAllHistoryItems()
 }

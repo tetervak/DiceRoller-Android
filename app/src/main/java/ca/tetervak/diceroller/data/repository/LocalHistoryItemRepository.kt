@@ -23,22 +23,22 @@ class LocalHistoryItemRepository @Inject constructor(
             list.map { it.toHistoryItem() }
         }.flowOn(Dispatchers.IO)
 
-    override suspend fun getHistoryItemById(id: Int): HistoryItem = withContext(Dispatchers.IO) {
-        historyItemDao.getHistoryItemById(id).toHistoryItem()
-    }
-
-    override suspend fun getHistoryTotal(): Int = withContext(Dispatchers.IO) {
-        historyItemDao.getHistoryTotal()
-    }
+//    override suspend fun getHistoryItemById(id: Int): HistoryItem = withContext(Dispatchers.IO) {
+//        historyItemDao.getHistoryItemById(id).toHistoryItem()
+//    }
+//
+//    override suspend fun getHistoryTotal(): Int = withContext(Dispatchers.IO) {
+//        historyItemDao.getHistoryTotal()
+//    }
 
     override suspend fun getHistoryCounts(): HistoryCounts = withContext(Dispatchers.IO) {
         historyItemDao.getHistoryCounts().toHistoryCounts()
     }
 
-    override suspend fun getHistoryCountsUntilId(id: Int): HistoryCounts =
-        withContext(Dispatchers.IO) {
-            historyItemDao.getHistoryCountsUntilId(id).toHistoryCounts()
-        }
+//    override suspend fun getHistoryCountsUntilId(id: Int): HistoryCounts =
+//        withContext(Dispatchers.IO) {
+//            historyItemDao.getHistoryCountsUntilId(id).toHistoryCounts()
+//        }
 
     override suspend fun getLastHistoryItem(): HistoryItem? = withContext(Dispatchers.IO) {
         historyItemDao.getLastHistoryItem()?.toHistoryItem()
@@ -52,9 +52,9 @@ class LocalHistoryItemRepository @Inject constructor(
         historyItemDao.insertHistoryItem(historyItem.toLocalHistoryItem())
     }
 
-    override suspend fun deleteHistoryItemById(id: Int) = withContext(Dispatchers.IO) {
-        historyItemDao.deleteHistoryItemById(id)
-    }
+//    override suspend fun deleteHistoryItemById(id: Int) = withContext(Dispatchers.IO) {
+//        historyItemDao.deleteHistoryItemById(id)
+//    }
 
     override suspend fun deleteAllHistoryItems() = withContext(Dispatchers.IO) {
         historyItemDao.deleteAllHistoryItems()

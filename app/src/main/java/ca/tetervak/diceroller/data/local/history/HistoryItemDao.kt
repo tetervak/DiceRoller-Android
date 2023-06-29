@@ -15,15 +15,15 @@ interface HistoryItemDao {
     @Query("SELECT * FROM history_items WHERE id=:id")
     suspend fun getHistoryItemById(id: Int): LocalHistoryItem
 
-    @Query("SELECT SUM(roll_total) FROM history_items")
-    suspend fun getHistoryTotal(): Int
+//    @Query("SELECT SUM(roll_total) FROM history_items")
+//    suspend fun getHistoryTotal(): Int
 
     @Query("SELECT COUNT(id) AS history_length, SUM(roll_total) AS history_total FROM history_items")
     suspend fun getHistoryCounts(): LocalHistoryCounts
 
-    @Query("SELECT COUNT(id) AS history_length, SUM(roll_total) AS history_total " +
-            "FROM history_items WHERE id<=:id")
-    suspend fun getHistoryCountsUntilId(id: Int): LocalHistoryCounts
+//    @Query("SELECT COUNT(id) AS history_length, SUM(roll_total) AS history_total " +
+//            "FROM history_items WHERE id<=:id")
+//    suspend fun getHistoryCountsUntilId(id: Int): LocalHistoryCounts
 
     @Query("SELECT EXISTS(SELECT id FROM history_items LIMIT 1)")
     suspend fun isHistoryNotEmpty(): Boolean
@@ -39,8 +39,8 @@ interface HistoryItemDao {
     @Insert
     suspend fun insertHistoryItem(historyItem: LocalHistoryItem)
 
-    @Query("DELETE FROM history_items WHERE id=:id")
-    suspend fun deleteHistoryItemById(id: Int)
+//    @Query("DELETE FROM history_items WHERE id=:id")
+//    suspend fun deleteHistoryItemById(id: Int)
 
     @Query("DELETE FROM history_items")
     suspend fun deleteAllHistoryItems()
