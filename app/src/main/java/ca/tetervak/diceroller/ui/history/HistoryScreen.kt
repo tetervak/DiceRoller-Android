@@ -44,7 +44,8 @@ import java.util.Date
 @Composable
 fun HistoryScreen(
     viewModel: HistoryViewModel,
-    onTabPressed: (String)->Unit,
+    onTabPressed: (String) -> Unit,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -57,7 +58,8 @@ fun HistoryScreen(
         topBar = {
             RollerTopAppBar(
                 title = stringResource(HistoryDestination.titleRes),
-                canNavigateBack = false,
+                canNavigateBack = true,
+                navigateUp = navigateBack,
                 scrollBehavior = scrollBehavior
             )
         },

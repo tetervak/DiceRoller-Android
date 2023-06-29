@@ -25,12 +25,14 @@ fun RollerNavHost(navController: NavHostController){
             val viewModel: HistoryViewModel = hiltViewModel()
             HistoryScreen(
                 viewModel = viewModel,
-                onTabPressed = tabNavigate(navController)
+                onTabPressed = tabNavigate(navController),
+                navigateBack = { navController.popBackStack() }
             )
         }
         composable(route = SettingsDestination.route){
             SettingsScreen(
-                onTabPressed = tabNavigate(navController)
+                onTabPressed = tabNavigate(navController),
+                navigateBack = { navController.popBackStack() }
             )
         }
     }

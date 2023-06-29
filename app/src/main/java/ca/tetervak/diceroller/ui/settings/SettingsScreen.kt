@@ -16,7 +16,8 @@ import ca.tetervak.diceroller.ui.navigation.SettingsDestination
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    onTabPressed: (String)->Unit,
+    onTabPressed: (String) -> Unit,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ){
 
@@ -26,7 +27,8 @@ fun SettingsScreen(
         topBar = {
             RollerTopAppBar(
                 title = stringResource(SettingsDestination.titleRes),
-                canNavigateBack = false,
+                canNavigateBack = true,
+                navigateUp = navigateBack,
                 scrollBehavior = scrollBehavior
             )
         },
