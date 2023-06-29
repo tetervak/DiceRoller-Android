@@ -1,4 +1,4 @@
-package ca.tetervak.diceroller.ui.roller
+package ca.tetervak.diceroller.ui.history
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -17,13 +17,13 @@ import ca.tetervak.diceroller.R
 import ca.tetervak.diceroller.ui.theme.AppTheme
 
 @Composable
-fun LoadingBody(modifier: Modifier = Modifier) {
+fun EmptyHistoryBody(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier.fillMaxSize()
     ) {
         Text(
-            text = stringResource(R.string.loading_data),
-            fontSize = 36.sp,
+            text = stringResource(R.string.empty_history),
+            fontSize = 28.sp,
             modifier = Modifier
                 .align(alignment = Alignment.Center)
                 .border(
@@ -38,6 +38,6 @@ fun LoadingBody(modifier: Modifier = Modifier) {
 @Composable
 fun LoadingBodyPreview(){
     AppTheme {
-        LoadingBody()
+        EmptyHistoryBody()
     }
 }

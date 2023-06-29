@@ -18,17 +18,17 @@ import ca.tetervak.diceroller.R
 @Composable
 fun TotalRow(@StringRes labelRes: Int, total: Int, modifier: Modifier = Modifier) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(0.7f),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
             text = stringResource(labelRes),
-            fontSize = 34.sp,
+            fontSize = 24.sp,
             modifier = Modifier
                 .fillMaxWidth(0.7f).wrapContentWidth(align = Alignment.End)
         )
         Text(
-            text = total.toString(), fontSize = 34.sp, color = colorResource(R.color.green_500)
+            text = total.toString(), fontSize = 24.sp, color = colorResource(R.color.green_500)
         )
     }
 }

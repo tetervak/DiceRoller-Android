@@ -19,5 +19,10 @@
     <string name="roller">Roller</string>
     <string name="history">History</string>
     <string name="settings">Settings</string>
+    <string name="empty_history">The History is Empty</string>
+    <string name="dice">dice</string>
+    <string name="values">values:</string>
+    <string name="value">value:</string>
+    <string name="number_of_dice">number of dice:</string>
 
 </resources>

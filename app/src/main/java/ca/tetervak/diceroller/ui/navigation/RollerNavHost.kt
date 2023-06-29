@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import ca.tetervak.diceroller.ui.history.HistoryScreen
+import ca.tetervak.diceroller.ui.history.HistoryViewModel
 import ca.tetervak.diceroller.ui.roller.RollerScreen
 import ca.tetervak.diceroller.ui.roller.RollerViewModel
 import ca.tetervak.diceroller.ui.settings.SettingsScreen
@@ -21,7 +22,9 @@ fun RollerNavHost(navController: NavHostController){
             )
         }
         composable(route = HistoryDestination.route){
+            val viewModel: HistoryViewModel = hiltViewModel()
             HistoryScreen(
+                viewModel = viewModel,
                 onTabPressed = tabNavigate(navController)
             )
         }
