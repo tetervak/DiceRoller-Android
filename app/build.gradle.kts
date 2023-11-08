@@ -2,9 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 
-    // needed by the local database
-    id("com.google.devtools.ksp")
-
     // needed for the dependency injection
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
@@ -79,15 +76,16 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$navVersion")
 
     // needed for the view model per destination, the hiltViewModel() function
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
     // need to receive remote data
     //implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
-    // needed by the local database, do not change it to "2.6.0"
-    val roomVersion="2.5.2"
+    // needed by the local database, not compatible with ksp
+    val roomVersion="2.6.0"
     implementation("androidx.room:room-runtime:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
+    //noinspection KaptUsageInsteadOfKsp
+    kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
 
     // needed to store settings

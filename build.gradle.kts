@@ -4,7 +4,4 @@ plugins {
 
     // needed for the dependency injection
     id("com.google.dagger.hilt.android") version "2.44.2" apply false
-
-    // needed by the local database
-    id("com.google.devtools.ksp") version "1.8.10-1.0.9" apply false
 }
