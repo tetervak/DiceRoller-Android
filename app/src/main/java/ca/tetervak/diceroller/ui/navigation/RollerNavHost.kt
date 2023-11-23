@@ -19,14 +19,14 @@ fun RollerNavHost(navController: NavHostController){
             val viewModel: RollerViewModel = hiltViewModel()
             RollerScreen(
                 viewModel = viewModel,
-                onTabPressed = tabNavigate(navController)
+                onTabPressed = { tabNavigate(navController, it) }
             )
         }
         composable(route = HistoryDestination.route){
             val viewModel: HistoryViewModel = hiltViewModel()
             HistoryScreen(
                 viewModel = viewModel,
-                onTabPressed = tabNavigate(navController),
+                onTabPressed = { tabNavigate(navController, it) },
                 navigateBack = { navController.popBackStack() }
             )
         }
@@ -34,16 +34,16 @@ fun RollerNavHost(navController: NavHostController){
             val viewModel: SettingsViewModel = hiltViewModel()
             SettingsScreen(
                 viewModel = viewModel,
-                onTabPressed = tabNavigate(navController),
+                onTabPressed = { tabNavigate(navController, it) },
                 navigateBack = { navController.popBackStack() }
             )
         }
     }
 }
 
-@Composable
-private fun tabNavigate(navController: NavHostController): (String) -> Unit = { route: String ->
+private fun tabNavigate(navController: NavHostController, route: String){
     if (route == RollerDestination.route) {
+        // pop the stack when returning to the home screen
         navController.popBackStack(
             route = RollerDestination.route, inclusive = false
         )
